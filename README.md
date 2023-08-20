@@ -1,6 +1,4 @@
-<img src = "https://github.com/darkmatter2000/darkmatter2000/blob/main/Purple%20Gradient%20Digital%20Marketing%20LinkedIn%20Banner.png" />
-
-<!--![](https://komarev.com/ghpvc/?username=darkmatter2000&style=for-the-badge&color=blueviolet)-->
+[](https://komarev.com/ghpvc/?username=darkmatter2000&style=for-the-badge&color=blueviolet)
 
 ### Hi there 👋
 
