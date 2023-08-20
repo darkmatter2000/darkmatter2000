@@ -13,7 +13,10 @@ Holder of a Bachelor's degree in Fundamental Physics, I am currently pursuing a 
 During the summer of 2023, I had the enriching opportunity to work at C12 Quantum Electronics as an engineering assistant within the team dedicated to qubit characterization.
 
 ### 📝 Projets 
-Mais projet sont plus orienté sur la simulation et la modelisation par les méthodes numérique et la programmation quantique.
+Mes projets sont plus orienté sur la simulation et la modelisation par les méthodes numérique et la programmation quantique:
+- ![Resolution de l'équation de Schrödinger pour un éléctron dans un potentiel périodique](https://github.com/darkmatter2000/schrodinger_equation_solver_with_finite_elements) In this project, using a finite element method approach, I sought to obtain the band diagram associated with our electron trapped in a periodic potential well. This well is modeled by the Kronig-Penney model.
+- ![Quantum Phase estimation](https://github.com/darkmatter2000/Quantum_phase_estimation) This project is an implementation of the quantum phase estimation algorithm using the new conditional measurement technique of Qiskit.
+- vjh
 
 ### 👩‍💻 Code 
 ![Isaac's GitHub stats](https://github-readme-stats.vercel.app/api?username=darkmatter2000&count_private=true&show_icons=true&theme=nightowl&hide=prs,contribs)
