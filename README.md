@@ -1,6 +1,6 @@
 ### Hi there 👋
 
-https://github.com/darkmatter2000/darkmatter2000/blob/main/Purple%20Gradient%20Digital%20Marketing%20LinkedIn%20Banner.png
+<img src = "https://github.com/darkmatter2000/darkmatter2000/blob/main/Purple%20Gradient%20Digital%20Marketing%20LinkedIn%20Banner.png" />
 
 <!--
 **darkmatter2000/darkmatter2000** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
