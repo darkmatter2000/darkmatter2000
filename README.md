@@ -17,19 +17,13 @@ Mais projet sont plus orienté sur la simulation et la modelisation par les mét
 
 ### 👩‍💻 Code 
 ![Isaac's GitHub stats](https://github-readme-stats.vercel.app/api?username=darkmatter2000&count_private=true&show_icons=true&theme=nightowl&hide=prs,contribs)
+![top-langs](https://github-readme-stats.vercel.app/api/top-langs?username=darkmatter2000&show_icons=true&theme=radical)
 
-My top languages are: Python, Julia & C.
 
-I have experience using: Qiskit, as well as various Quantum Discrete event simulators, such as Netsquid and SeQUeNCe. 
-In my pinned repositories, you can find examples of my Quantum Discrete event simulations (Python) as well as my personal academic quantum paper library, and one of my projects based on multidimentional superconducting materials (C).
-In terms of open source I have worked/contributed to the following repos:
-- SeQUeNCe: an open source Simulator of QUantum Network Communication that allows modeling of quantum networks including photonic network components, control protocols, and applications. that allows modeling of quantum networks including photonic network components, control protocols, and applications. 
-- Quantum Universal Education: a community-driven, open-source educational website for learning about all aspects of quantum computing across the full stack, from hardware to algorithms.
-- Qiskit: an open-source SDK for working with quantum computers at the level of extended quantum circuits, operators, and algorithms. 
-- QuantumClifford: a simulator of Clifford circuits, graph states, and other quantum Stabilizer formalism tools. 
+I have experience using Matlab. pour l'informatique quantique j'utilise principalement qiskit comme framework mais aussi Pennyland(Xanadu) , Perceval(Quandela) et MyQML(Atos).
 
 ### You can find me on: [LinkedIn][1].
-[1]: https://www.linkedin.com/in/maria-gragera-garces/
+[1]: https://www.linkedin.com/in/don-isaac/
 
 
 
