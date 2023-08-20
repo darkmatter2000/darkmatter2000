@@ -19,8 +19,7 @@ Mais projet sont plus orienté sur la simulation et la modelisation par les mét
 ![Isaac's GitHub stats](https://github-readme-stats.vercel.app/api?username=darkmatter2000&count_private=true&show_icons=true&theme=nightowl&hide=prs,contribs)
 ![top-langs](https://github-readme-stats.vercel.app/api/top-langs?username=darkmatter2000&show_icons=true&theme=radical)
 
-
-I have experience using Matlab. pour l'informatique quantique j'utilise principalement qiskit comme framework mais aussi Pennyland(Xanadu) , Perceval(Quandela) et MyQML(Atos).
+I have a strong experience in using Matlab. For quantum computing, I mainly use the Qiskit framework. I have also explored other tools and libraries such as Xanadu's Pennyland, Quandela's Perceval, and Atos' MyQML.
 
 ### You can find me on: [LinkedIn][1].
 [1]: https://www.linkedin.com/in/don-isaac/
