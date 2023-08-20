@@ -13,12 +13,10 @@ Holder of a Bachelor's degree in Fundamental Physics, I am currently pursuing a 
 During the summer of 2023, I had the enriching opportunity to work at C12 Quantum Electronics as an engineering assistant within the team dedicated to qubit characterization.
 
 ### 📝 Projets 
-A lot of my work revolves around quantum networking. You can follow my readings in my Quantum-tech-papers repository.
-I have worked in quantum protocol design and testing with Netsquid and Python, a quantum error correction library for Julia's QUantum Clifford tool, and side by side comparisons of quantum networks against classical networks based on various topological distributions.
-At the moment I am experimenting with qiskit and error mitigation libraries.
+Mais projet sont plus orienté sur la simulation et la modelisation par les méthodes numérique et la programmation quantique.
 
 ### 👩‍💻 Code 
-![Maria's GitHub stats](https://github-readme-stats.vercel.app/api?username=darkmatter2000&count_private=true&show_icons=true&theme=nightowl&hide=prs,contribs)
+![Isaac's GitHub stats](https://github-readme-stats.vercel.app/api?username=darkmatter2000&count_private=true&show_icons=true&theme=nightowl&hide=prs,contribs)
 
 My top languages are: Python, Julia & C.
 
