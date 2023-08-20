@@ -16,7 +16,7 @@ During the summer of 2023, I had the enriching opportunity to work at C12 Quantu
 My projects are focused on quantum programming and simulation, as well as modeling using numerical methods:
 - [Resolution de l'équation de Schrödinger pour un éléctron dans un potentiel périodique](https://github.com/darkmatter2000/schrodinger_equation_solver_with_finite_elements) In this project, using a finite element method approach, I sought to obtain the band diagram associated with our electron trapped in a periodic potential well. This well is modeled by the Kronig-Penney model.
 - [Quantum Phase estimation](https://github.com/darkmatter2000/Quantum_phase_estimation) This project is an implementation of the quantum phase estimation algorithm using the new conditional measurement technique of Qiskit.
-- 
+- [Mix electric problem](https://github.com/darkmatter2000/Energy_Mix_Problem) Quantum optimization algorithms for solving the electricity mix problem in the case of a renewable energy bouquet.
 
 ### 👩‍💻 Code 
 ![Isaac's GitHub stats](https://github-readme-stats.vercel.app/api?username=darkmatter2000&count_private=true&show_icons=true&theme=nightowl&hide=prs,contribs)
