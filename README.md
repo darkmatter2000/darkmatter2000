@@ -4,11 +4,15 @@
 
 ### Hi there 👋
 
-### 📚 Background
-I am Maria (she/her), an undergraduate Physics student at the University of Bath, who enjoys quantum algorithm design and implementations for Quantum Networking and Simulation systems.
-Between 2021/2022 I completed and industrial year-long placement at Cisco's R&D Quantum Networking team. During the Summer 2022 I was a Google scholar for the Google Summer of code. At the moment I am a IBM Quantum Intern & GitHub campus expert, with a strong interest in quantum tech.
+### About me
+Quantum engineering student passionate about the development and application of quantum technologies. My journey is focused on the development of quantum algorithms and solutions, as well as their application in various domains. I am driven by the possibilities offered by quantum computing to solve complex problems and push current boundaries. Always keeping an eye on the latest advancements in this exciting field, I am determined to contribute to shaping the future of quantum technology .
 
-### 📝 Research 
+### 📚 Background
+Holder of a Bachelor's degree in Fundamental Physics, I am currently pursuing a Master's degree in Quantum Engineering with a specialization in Quantum Computing. My academic journey has enabled me to acquire a strong foundation in the field of quantum physics and its applications.
+
+During the summer of 2023, I had the enriching opportunity to work at C12 Quantum Electronics as an engineering assistant within the team dedicated to qubit characterization.
+
+### 📝 Projets 
 A lot of my work revolves around quantum networking. You can follow my readings in my Quantum-tech-papers repository.
 I have worked in quantum protocol design and testing with Netsquid and Python, a quantum error correction library for Julia's QUantum Clifford tool, and side by side comparisons of quantum networks against classical networks based on various topological distributions.
 At the moment I am experimenting with qiskit and error mitigation libraries.
