@@ -1,9 +1,7 @@
 [](https://komarev.com/ghpvc/?username=darkmatter2000&style=for-the-badge&color=blueviolet)
 
 ### Hi there 👋
-
-### About me
-Quantum engineering student passionate about the development and application of quantum technologies. My journey is focused on the development of quantum algorithms and solutions, as well as their application in various domains. I am driven by the possibilities offered by quantum computing to solve complex problems and push current boundaries. Always keeping an eye on the latest advancements in this exciting field, I am determined to contribute to shaping the future of quantum technology .
+An quantum engineering student passionate about the development and application of quantum technologies. My journey is focused on the development of quantum algorithms and solutions, as well as their application in various domains. I am driven by the possibilities offered by quantum computing to solve complex problems and push current boundaries. Always keeping an eye on the latest advancements in this exciting field, I am determined to contribute to shaping the future of quantum technology .
 
 ### 📚 Background
 Holder of a Bachelor's degree in Fundamental Physics, I am currently pursuing a Master's degree in Quantum Engineering with a specialization in Quantum Computing. My academic journey has enabled me to acquire a strong foundation in the field of quantum physics and its applications.
