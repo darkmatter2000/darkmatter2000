@@ -8,7 +8,7 @@ Holder of a Bachelor's degree in Fundamental Physics, I am currently pursuing a 
 
 ### 📝 Projets 
 My projects are focused on quantum programming and simulation, as well as modeling using numerical methods:
-- [Solving the Max-Cut problem using the quantum annealing method with a gate-based quantum algorithm.](https://github.com/darkmatter2000/QOSF_Mentorship_program_cohort_9) 
+- [Solving the Max-Cut problem using the quantum annealing method with a gate-based quantum algorithm.](https://github.com/darkmatter2000/Maxcut_with_gate_based_version_of_quantum_annealing) 
 - [Quantum Phase estimation](https://github.com/darkmatter2000/Quantum_phase_estimation) This project is an implementation of the quantum phase estimation algorithm using the new conditional measurement technique of Qiskit.
 - [Quantum phase estimation](https://github.com/darkmatter2000/Quantum_phase_estimation) 
 - [Qmole](https://github.com/darkmatter2000/qmole) This project involves the creation of software to simulate simple molecules using quantum algorithms for the simulation calculations.
