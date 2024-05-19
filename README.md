@@ -9,8 +9,8 @@ Holder of a Bachelor's degree in Fundamental Physics, I am currently pursuing a 
 ### 📝 Projets 
 My projects are focused on quantum programming and simulation, as well as modeling using numerical methods:
 - [Solving the Max-Cut problem using the quantum annealing method with a gate-based quantum algorithm.](https://github.com/darkmatter2000/QOSF_Mentorship_program_cohort_9)
-- [Resolution de l'équation de Schrödinger pour un éléctron dans un potentiel périodique](https://github.com/darkmatter2000/schrodinger_equation_solver_with_finite_elements) In this project, using a finite element method approach, I sought to obtain the band diagram associated with our electron trapped in a periodic potential well. This well is modeled by the Kronig-Penney model.
 - [Quantum Phase estimation](https://github.com/darkmatter2000/Quantum_phase_estimation) This project is an implementation of the quantum phase estimation algorithm using the new conditional measurement technique of Qiskit.
+- [Resolution de l'équation de Schrödinger pour un éléctron dans un potentiel périodique](https://github.com/darkmatter2000/schrodinger_equation_solver_with_finite_elements) In this project, using a finite element method approach, I sought to obtain the band diagram associated with our electron trapped in a periodic potential well. This well is modeled by the Kronig-Penney model.
 - [Mix electric problem](https://github.com/darkmatter2000/Energy_Mix_Problem) Quantum optimization algorithms for solving the electricity mix problem in the case of a renewable energy bouquet.
 
 ### 👩‍💻 Code 
