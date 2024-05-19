@@ -6,8 +6,6 @@ An quantum engineering student passionate about the development and application 
 ### 📚 Background
 Holder of a Bachelor's degree in Fundamental Physics, I am currently pursuing a Master's degree in Quantum Engineering with a specialization in Quantum Computing. My academic journey has enabled me to acquire a strong foundation in the field of quantum physics and its applications.
 
-During the summer of 2023, I had the enriching opportunity to work at C12 Quantum Electronics as an engineering assistant within the team dedicated to qubit characterization.
-
 ### 📝 Projets 
 My projects are focused on quantum programming and simulation, as well as modeling using numerical methods:
 - [Resolution de l'équation de Schrödinger pour un éléctron dans un potentiel périodique](https://github.com/darkmatter2000/schrodinger_equation_solver_with_finite_elements) In this project, using a finite element method approach, I sought to obtain the band diagram associated with our electron trapped in a periodic potential well. This well is modeled by the Kronig-Penney model.
