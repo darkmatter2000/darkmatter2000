@@ -12,7 +12,6 @@ My projects are focused on quantum programming and simulation, as well as modeli
 - [Quantum Phase estimation](https://github.com/darkmatter2000/Quantum_phase_estimation) This project is an implementation of the quantum phase estimation algorithm using the new conditional measurement technique of Qiskit.
 - [Quantum phase estimation](https://github.com/darkmatter2000/Quantum_phase_estimation) 
 - [Qmole](https://github.com/darkmatter2000/qmole) This project involves the creation of software to simulate simple molecules using quantum algorithms for the simulation calculations.
-- [Mix electric problem](https://github.com/darkmatter2000/Energy_Mix_Problem)
 - [Resolution de l'équation de Schrödinger pour un éléctron dans un potentiel périodique](https://github.com/darkmatter2000/schrodinger_equation_solver_with_finite_elements) In this project, using a finite element method approach, I sought to obtain the band diagram associated with our electron trapped in a periodic potential well. This well is modeled by the Kronig-Penney model.
 - [Mix electric problem](https://github.com/darkmatter2000/Energy_Mix_Problem) Quantum optimization algorithms for solving the electricity mix problem in the case of a renewable energy bouquet.
 
