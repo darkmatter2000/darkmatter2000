@@ -1,4 +1,4 @@
-[](https://komarev.com/ghpvc/?username=darkmatter2000&style=for-the-badge&color=blueviolet)
+%[](https://komarev.com/ghpvc/?username=darkmatter2000&style=for-the-badge&color=blueviolet)
 
 ### Hi there 👋
 An quantum engineering student passionate about the development and application of quantum technologies. My journey is focused on the development of quantum algorithms and solutions, as well as their application in various domains. I am driven by the possibilities offered by quantum computing to solve complex problems and push current boundaries. Always keeping an eye on the latest advancements in this exciting field, I am determined to contribute to shaping the future of quantum technology .
