@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Isaac Donchi Kamga — Quantum Computing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#04091a;
+  --surface:rgba(11,22,40,0.85);
+  --border:rgba(6,182,212,0.12);
+  --border-hi:rgba(6,182,212,0.38);
+  --c:#06b6d4;
+  --p:#8b5cf6;
+  --g:#10b981;
+  --y:#fbbf24;
+  --t:#e2e8f0;
+  --td:#94a3b8;
+  --tm:#475569;
+}
+html,body{background:var(--bg);color:var(--t);font-family:'Exo 2',sans-serif;min-height:100vh;overflow-x:hidden}
+#bg{position:fixed;inset:0;pointer-events:none;z-index:0}
+#app{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:2rem 1.25rem 5rem}
+
+/* ── HEADER ── */
+.hdr{display:flex;gap:1.75rem;align-items:center;padding:2rem;background:var(--surface);border:1px solid var(--border);border-radius:20px;backdrop-filter:blur(14px);margin-bottom:1.5rem}
+.hdr-avatar{width:100px;height:100px;border-radius:50%;border:2px solid var(--c);box-shadow:0 0 28px rgba(6,182,212,.4),0 0 8px rgba(6,182,212,.2);flex-shrink:0;object-fit:cover}
+.hdr-name{font-size:1.75rem;font-weight:900;line-height:1.15;background:linear-gradient(120deg,#f1f5f9 30%,var(--c) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.25rem}
+.hdr-role{font-family:'JetBrains Mono',monospace;font-size:.83rem;color:var(--c);margin-bottom:.75rem;opacity:.9}
+.hdr-meta{font-size:.76rem;color:var(--td);display:flex;flex-wrap:wrap;gap:.35rem .9rem;margin-bottom:.9rem}
+.hdr-links{display:flex;gap:.55rem;flex-wrap:wrap}
+.btn-link{display:inline-flex;align-items:center;gap:.35rem;padding:.38rem .85rem;border:1px solid var(--border);border-radius:999px;font-size:.77rem;font-weight:500;color:var(--td);text-decoration:none;transition:all .2s;background:rgba(255,255,255,.03)}
+.btn-link:hover{border-color:var(--border-hi);color:var(--c);background:rgba(6,182,212,.08)}
+.badge{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .7rem;border-radius:999px;font-size:.72rem;font-family:'JetBrains Mono',monospace;font-weight:500}
+.badge-y{background:rgba(251,191,36,.1);color:var(--y);border:1px solid rgba(251,191,36,.25)}
+
+/* ── TABS ── */
+.tab-bar{display:flex;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:5px;margin-bottom:1.75rem;backdrop-filter:blur(14px);overflow-x:auto;scrollbar-width:none}
+.tab-bar::-webkit-scrollbar{display:none}
+.tab-btn{flex:1;min-width:max-content;padding:.58rem 1.1rem;border:1px solid transparent;border-radius:9px;background:transparent;color:var(--tm);font-family:'Exo 2',sans-serif;font-size:.83rem;font-weight:500;cursor:pointer;white-space:nowrap;transition:all .2s}
+.tab-btn:hover{color:var(--t);background:rgba(255,255,255,.04)}
+.tab-btn.on{background:rgba(6,182,212,.12);border-color:rgba(6,182,212,.25);color:var(--c)}
+
+/* ── PANELS ── */
+.panel{display:none}.panel.on{display:block;animation:fi .3s ease}
+@keyframes fi{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── SECTION HEADING ── */
+.sh{font-size:.7rem;font-family:'JetBrains Mono',monospace;text-transform:uppercase;letter-spacing:.12em;color:var(--c);margin-bottom:1rem;margin-top:1.75rem;display:flex;align-items:center;gap:.75rem}
+.sh::after{content:'';flex:1;height:1px;background:linear-gradient(to right,var(--border),transparent)}
+.sh:first-child{margin-top:0}
+
+/* ── ABOUT ── */
+.bio{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.4rem;font-size:.9rem;line-height:1.7;color:var(--td);margin-bottom:1.5rem;backdrop-filter:blur(10px)}
+.bio p+p{margin-top:.75rem}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:.25rem}
+@media(max-width:580px){.stats-row{grid-template-columns:repeat(2,1fr)}}
+.stat{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.1rem;text-align:center;transition:all .2s}
+.stat:hover{border-color:var(--border-hi);box-shadow:0 0 18px rgba(6,182,212,.08)}
+.stat-n{display:block;font-size:1.9rem;font-weight:700;color:var(--c);font-family:'JetBrains Mono',monospace;margin-bottom:.2rem}
+.stat-l{font-size:.68rem;text-transform:uppercase;letter-spacing:.05em;color:var(--tm)}
+.dist{background:var(--surface);border:1px solid rgba(251,191,36,.2);border-radius:14px;padding:1.1rem 1.4rem;margin-bottom:.75rem}
+.dist-t{font-weight:600;color:var(--y);margin-bottom:.3rem;font-size:.9rem}
+.dist-d{font-size:.82rem;color:var(--td);line-height:1.5}
+.dist.pur{border-color:rgba(139,92,246,.2)}.dist.pur .dist-t{color:var(--p)}
+
+/* ── PROJECTS ── */
+.pg{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:1.1rem}
+.pc{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:transform .25s,border-color .25s,box-shadow .25s;cursor:default}
+.pc.clickable{cursor:pointer}
+.pc.clickable:hover{transform:translateY(-4px);border-color:var(--border-hi);box-shadow:0 12px 36px rgba(6,182,212,.12)}
+.pv{height:110px;flex-shrink:0;overflow:hidden}.pv svg{width:100%;height:100%}
+.pb{padding:1.1rem;display:flex;flex-direction:column;gap:.5rem;flex:1}
+.pt{font-size:.92rem;font-weight:600;color:var(--t);line-height:1.3}
+.pd{font-size:.79rem;color:var(--td);line-height:1.55;flex:1}
+.pdate{font-size:.7rem;color:var(--tm);font-family:'JetBrains Mono',monospace}
+.tags{display:flex;flex-wrap:wrap;gap:.35rem}
+.tag{font-size:.67rem;font-family:'JetBrains Mono',monospace;padding:.18rem .55rem;border-radius:999px;font-weight:500}
+.tc{background:rgba(6,182,212,.1);color:var(--c);border:1px solid rgba(6,182,212,.2)}
+.tp{background:rgba(139,92,246,.1);color:var(--p);border:1px solid rgba(139,92,246,.2)}
+.tg{background:rgba(16,185,129,.1);color:var(--g);border:1px solid rgba(16,185,129,.2)}
+.ty{background:rgba(251,191,36,.1);color:var(--y);border:1px solid rgba(251,191,36,.2)}
+.gh-link{display:inline-flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--td);font-family:'JetBrains Mono',monospace;text-decoration:none;transition:color .15s}
+.gh-link:hover{color:var(--c)}
+.wip{font-size:.7rem;color:var(--tm);font-family:monospace}
+
+/* ── TIMELINE ── */
+.tl{padding-left:1.5rem;position:relative}
+.tl::before{content:'';position:absolute;left:0;top:12px;bottom:0;width:1px;background:linear-gradient(to bottom,var(--c),var(--p),transparent);opacity:.3}
+.tli{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.4rem;margin-bottom:1.2rem;transition:border-color .2s,box-shadow .2s}
+.tli::before{content:'';position:absolute;left:-2rem;top:1.35rem;width:9px;height:9px;border-radius:50%;background:var(--c);box-shadow:0 0 8px var(--c)}
+.tli:hover{border-color:rgba(6,182,212,.22);box-shadow:0 4px 20px rgba(6,182,212,.06)}
+.tlhdr{display:flex;justify-content:space-between;flex-wrap:wrap;gap:.4rem;margin-bottom:.4rem}
+.tlttl{font-size:.97rem;font-weight:600;color:var(--t)}
+.tlsub{font-size:.82rem;color:var(--c);opacity:.8;margin-bottom:.25rem}
+.tlloc{font-size:.76rem;color:var(--tm);margin-bottom:.55rem}
+.tldate{font-size:.72rem;color:var(--tm);font-family:'JetBrains Mono',monospace;white-space:nowrap}
+.tlbody{font-size:.83rem;color:var(--td);line-height:1.6}
+.tlbody ul{padding-left:1.1rem}.tlbody li{margin-bottom:.25rem}
+
+/* ── SKILLS ── */
+.sk-sec{margin-bottom:1.5rem}
+.sk-tags{display:flex;flex-wrap:wrap;gap:.5rem}
+.sk{padding:.42rem .9rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:8px;font-size:.8rem;color:var(--td);font-family:'JetBrains Mono',monospace;transition:all .2s}
+.sk:hover{border-color:var(--border-hi);color:var(--t);background:rgba(6,182,212,.05)}
+.cg{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:.6rem}
+.cert{background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;font-size:.8rem;color:var(--td);display:flex;align-items:center;gap:.55rem;transition:all .2s}
+.cert:hover{border-color:rgba(139,92,246,.3);color:var(--t);background:rgba(139,92,246,.06)}
+.cert-ico{color:var(--p);font-size:.9rem;flex-shrink:0}
+
+/* ── RESPONSIVE ── */
+@media(max-width:620px){
+  .hdr{flex-direction:column;text-align:center}
+  .hdr-links,.hdr-meta{justify-content:center}
+  .hdr-name{font-size:1.4rem}
+  .pg{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg"></canvas>
+
+<div id="app">
+  <!-- ── HEADER ── -->
+  <header class="hdr">
+    <img src="https://avatars.githubusercontent.com/u/75215629?v=4" class="hdr-avatar" alt="Isaac Donchi Kamga"/>
+    <div>
+      <div class="hdr-name">Isaac Christ Donchi Kamga</div>
+      <div class="hdr-role">// Quantum Computing Researcher &amp; Engineer</div>
+      <div class="hdr-meta">
+        <span>🎓 Université de Sherbrooke</span>
+        <span>⚛️ M.Sc. Quantum Computing</span>
+        <span>📍 Sherbrooke, QC, Canada</span>
+      </div>
+      <div class="hdr-links">
+        <a href="https://github.com/darkmatter2000" target="_blank" class="btn-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+          GitHub
+        </a>
+        <a href="https://www.linkedin.com/in/don-isaac/" target="_blank" class="btn-link">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <span class="badge badge-y">🥇 PASQAL Hackathon Winner</span>
+        <span class="badge" style="background:rgba(6,182,212,.1);color:var(--c);border:1px solid rgba(6,182,212,.25)">⚛️ IBM Qiskit Advocate</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- ── TAB BAR ── -->
+  <nav class="tab-bar">
+    <button class="tab-btn on" data-tab="about">About</button>
+    <button class="tab-btn" data-tab="projects">Projects</button>
+    <button class="tab-btn" data-tab="experience">Experience</button>
+    <button class="tab-btn" data-tab="education">Education</button>
+    <button class="tab-btn" data-tab="skills">Skills</button>
+  </nav>
+
+  <!-- ── ABOUT ── -->
+  <div class="panel on" id="about">
+    <div class="bio">
+      <p>Quantum engineering student at Université de Sherbrooke, conducting research at the Institut Quantique on implementing machine learning on neutral-atom quantum computers (PASQAL platform), under the supervision of Prof. Stefanos Kourtis.</p>
+      <p>My academic journey spans fundamental physics in Cameroon, a double master's degree in quantum engineering at Grenoble INP PHELMA × UGA in France, and a research M.Sc. in quantum computing in Canada. I have hands-on experience with continuous-variable QKD at Exail and carbon nanotube qubit fabrication at C12 Quantum Electronics. First-prize winner at the CMC Technology × PASQAL hackathon (2024) and IBM Qiskit Advocate since August 2025.</p>
+    </div>
+    <div class="stats-row">
+      <div class="stat"><span class="stat-n">8+</span><span class="stat-l">Quantum Projects</span></div>
+      <div class="stat"><span class="stat-n">2</span><span class="stat-l">Research Internships</span></div>
+      <div class="stat"><span class="stat-n">🥇</span><span class="stat-l">Hackathon Winner</span></div>
+      <div class="stat"><span class="stat-n">9</span><span class="stat-l">Certifications</span></div>
+    </div>
+
+    <div class="sh">🏆 Distinctions</div>
+    <div class="dist">
+      <div class="dist-t">🥇 1st Prize — CMC Technology × PASQAL Hackathon (Sep–Oct 2024)</div>
+      <div class="dist-d">Proposed a hybrid quantum-classical algorithm for a communication antenna placement problem. Quebec, Canada.</div>
+    </div>
+    <div class="dist pur">
+      <div class="dist-t">🎓 €16,000 Scholarship — Programme QUANTUM, UGA (2022–2024)</div>
+      <div class="dist-d">Full scholarship from the QUANTUM program at Université Grenoble Alpes for the double-degree quantum engineering curriculum in Grenoble, France.</div>
+    </div>
+  </div>
+
+  <!-- ── PROJECTS ── -->
+  <div class="panel" id="projects">
+    <div class="pg" id="pjgrid"></div>
+  </div>
+
+  <!-- ── EXPERIENCE ── -->
+  <div class="panel" id="experience">
+    <div class="tl">
+      <div class="tli">
+        <div class="tlhdr">
+          <div>
+            <div class="tlttl">Research Engineer Intern</div>
+            <div class="tlsub">Exail · Baptiste Gouraud, Senior Principal Scientist</div>
+            <div class="tlloc">📍 Besançon, France</div>
+          </div>
+          <div class="tldate">Feb 2024 – Jul 2024</div>
+        </div>
+        <div class="tlbody">
+          <ul>
+            <li>Study and implementation of Continuous-Variable Quantum Key Distribution (CVQKD).</li>
+            <li>Used LDPC error correction codes in the CVQKD protocol — analyzed influence of code parameters on key quantity and quality.</li>
+            <li>Laser calibration: measurements and adjustments of laser parameters critical for CVQKD.</li>
+          </ul>
+          <div class="tags" style="margin-top:.75rem">
+            <span class="tag tc">CVQKD</span><span class="tag tc">QKD</span><span class="tag tp">C++</span><span class="tag tp">LDPC</span><span class="tag tg">Laser Calibration</span>
+          </div>
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tlhdr">
+          <div>
+            <div class="tlttl">Research Engineer Intern</div>
+            <div class="tlsub">C12 Quantum Electronics · Romaric Le Goff, Research Engineer</div>
+            <div class="tlloc">📍 Paris, France</div>
+          </div>
+          <div class="tldate">Jul 2023 – Sep 2023</div>
+        </div>
+        <div class="tlbody">
+          <ul>
+            <li>Familiarized with CVD nanotube growth techniques used for qubit fabrication at C12.</li>
+            <li>Modeled the Buffon needle problem to estimate the probability of usable nanotube formation.</li>
+            <li>Analytical calculations to determine usable nanotube bridge probability.</li>
+            <li>Distribution analysis and modeling of nanotube bridges to reduce defects and clustering.</li>
+          </ul>
+          <div class="tags" style="margin-top:.75rem">
+            <span class="tag tc">CVD</span><span class="tag tp">Python</span><span class="tag tg">Probability Modeling</span><span class="tag tg">Nanotube Qubits</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── EDUCATION ── -->
+  <div class="panel" id="education">
+    <div class="tl">
+      <div class="tli">
+        <div class="tlhdr">
+          <div>
+            <div class="tlttl">M.Sc. Research — Quantum Computing</div>
+            <div class="tlsub">Université de Sherbrooke · Supervisor: Stefanos Kourtis</div>
+            <div class="tlloc">📍 Sherbrooke, Quebec, Canada</div>
+          </div>
+          <div class="tldate">Sep 2025 – Sep 2027</div>
+        </div>
+        <div class="tlbody">Research: kernel methods on PASQAL neutral-atom quantum computers.<br>Courses: Superconducting qubit computers, Quantum algorithms, Condensed matter modeling, Research Optimization, Machine learning techniques.</div>
+      </div>
+      <div class="tli">
+        <div class="tlhdr">
+          <div>
+            <div class="tlttl">Double Master's — Quantum Information &amp; Quantum Engineering</div>
+            <div class="tlsub">Grenoble INP PHELMA × Université Grenoble Alpes</div>
+            <div class="tlloc">📍 Grenoble, France</div>
+          </div>
+          <div class="tldate">Sep 2022 – Sep 2024</div>
+        </div>
+        <div class="tlbody">
+          <strong style="color:var(--c)">Year 2 (Quantum):</strong> Quantum algorithms, error correction, open quantum systems, quantum optics, superconducting &amp; spin qubits, nanomagnetism, condensed matter, nanofabrication, microwave &amp; cryoelectronics.<br><br>
+          <strong style="color:var(--c)">Year 1 (Photonics &amp; Microelectronics):</strong> Guided EM wave propagation, electronics for measurement, quantum physics, laser physics, solid-state physics, semiconductor physics, numerical methods.
+        </div>
+      </div>
+      <div class="tli">
+        <div class="tlhdr">
+          <div>
+            <div class="tlttl">Classes Préparatoires — Mathematics &amp; Physics</div>
+            <div class="tlsub">École Nationale Supérieure Polytechnique de Yaoundé</div>
+            <div class="tlloc">📍 Yaoundé, Cameroon</div>
+          </div>
+          <div class="tldate">Sep 2019 – May 2022</div>
+        </div>
+        <div class="tlbody">Intensive preparatory program in mathematics and physics for top-tier engineering schools.</div>
+      </div>
+      <div class="tli">
+        <div class="tlhdr">
+          <div>
+            <div class="tlttl">Bachelor's Degree — Fundamental Physics</div>
+            <div class="tlsub">Université de Yaoundé I</div>
+            <div class="tlloc">📍 Yaoundé, Cameroon</div>
+          </div>
+          <div class="tldate">Sep 2017 – May 2020</div>
+        </div>
+        <div class="tlbody">Quantum mechanics, condensed matter, nuclear physics, statistical physics, electromagnetism, coherent optics, wave propagation, thermodynamics.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SKILLS ── -->
+  <div class="panel" id="skills">
+    <div class="sh">Programming Languages</div>
+    <div class="sk-sec"><div class="sk-tags"><span class="sk">Python</span><span class="sk">C++</span><span class="sk">MATLAB</span></div></div>
+
+    <div class="sh">Quantum Frameworks</div>
+    <div class="sk-sec"><div class="sk-tags">
+      <span class="sk">Qiskit</span><span class="sk">PennyLane</span><span class="sk">Pulser (PASQAL)</span>
+      <span class="sk">CUDA-Q (NVIDIA)</span><span class="sk">Perceval (Quandela)</span><span class="sk">MyQML (Atos)</span>
+    </div></div>
+
+    <div class="sh">Tools &amp; Platforms</div>
+    <div class="sk-sec"><div class="sk-tags">
+      <span class="sk">VS Code</span><span class="sk">Jupyter Notebook</span><span class="sk">AFF3CT</span>
+      <span class="sk">Git / GitHub</span><span class="sk">IBM Quantum Platform</span>
+    </div></div>
+
+    <div class="sh">Languages</div>
+    <div class="sk-sec"><div class="sk-tags">
+      <span class="sk">🇫🇷 French — Native</span><span class="sk">🇬🇧 English — B2</span>
+    </div></div>
+
+    <div class="sh">Certifications</div>
+    <div class="cg">
+      <div class="cert"><span class="cert-ico">✦</span>Qiskit Certification</div>
+      <div class="cert"><span class="cert-ico">✦</span>PennyLane Certification</div>
+      <div class="cert"><span class="cert-ico">✦</span>Algorithm Design — Classiq</div>
+      <div class="cert"><span class="cert-ico">✦</span>QBronze: Quantum Computing</div>
+      <div class="cert"><span class="cert-ico">✦</span>IBM Quantum Challenge 2024</div>
+      <div class="cert"><span class="cert-ico">✦</span>Introduction to PennyLane</div>
+      <div class="cert"><span class="cert-ico">✦</span>Quantum Optics 1</div>
+      <div class="cert"><span class="cert-ico">✦</span>Quantum Mechanics Course</div>
+      <div class="cert"><span class="cert-ico">✦</span>Engenii Quantum ML</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── TAB SWITCHING ── */
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const t=b.dataset.tab;
+    document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('on'));
+    document.querySelectorAll('.panel').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    document.getElementById(t).classList.add('on');
+  });
+});
+
+/* ── PROJECT DATA ── */
+const projects=[
+  {
+    title:"Molecular Docking with CUDAQ",date:"June 2025",
+    desc:"Variational multilayer multi-angle algorithm to solve the molecular docking problem on neutral-atom quantum hardware.",
+    tags:[{l:"CUDA-Q",c:"tc"},{l:"Variational QA",c:"tp"},{l:"Python",c:"tp"}],
+    github:null,c1:"#0ea5e9",c2:"#8b5cf6",visual:"molecule"
+  },
+  {
+    title:"Quantum Antenna Placement",date:"Oct 2024",
+    desc:"Quasi-adiabatic pulse sequences with Rabi couplings, segmented linear detuning sweeps, and low-pass filtering on Pulser. 🥇 PASQAL Hackathon Winner.",
+    tags:[{l:"Pulser",c:"tc"},{l:"PASQAL",c:"tc"},{l:"Adiabatic",c:"tp"}],
+    github:null,c1:"#06b6d4",c2:"#0ea5e9",visual:"antenna"
+  },
+  {
+    title:"Clinical Trials Optimization",date:"Sep 2024",
+    desc:"Hamiltonian formulation of clinical trial scheduling, solved with QAOA using Qiskit.",
+    tags:[{l:"Qiskit",c:"tc"},{l:"QAOA",c:"tp"},{l:"Python",c:"tp"}],
+    github:null,c1:"#10b981",c2:"#06b6d4",visual:"circuit"
+  },
+  {
+    title:"QAOA & Quantum Annealing — MaxCut",date:"Mar 2024",
+    desc:"QAOA implementation from scratch for MaxCut on graph series, with comparative quantum annealing analysis using Pulser.",
+    tags:[{l:"Qiskit",c:"tc"},{l:"Pulser",c:"tc"},{l:"MaxCut",c:"tp"}],
+    github:"https://github.com/darkmatter2000/Maxcut_with_gate_based_version_of_quantum_annealing",c1:"#f59e0b",c2:"#ef4444",visual:"graph"
+  },
+  {
+    title:"Quantum Phase Estimation",date:"2024",
+    desc:"QPE algorithm using Qiskit's new conditional measurement technique. Clean qubit-efficient implementation.",
+    tags:[{l:"Qiskit",c:"tc"},{l:"QPE",c:"tp"},{l:"Jupyter",c:"tg"}],
+    github:"https://github.com/darkmatter2000/Quantum_phase_estimation",c1:"#8b5cf6",c2:"#6366f1",visual:"bloch"
+  },
+  {
+    title:"Qmole — Quantum Molecule Simulator",date:"2024",
+    desc:"Software to simulate simple molecules using quantum algorithms (VQE) for ground-state energy calculations.",
+    tags:[{l:"Python",c:"tp"},{l:"Qiskit",c:"tc"},{l:"VQE",c:"tc"}],
+    github:"https://github.com/darkmatter2000/qmole",c1:"#10b981",c2:"#14b8a6",visual:"h2mol"
+  },
+  {
+    title:"Schrödinger Equation Solver",date:"2024",
+    desc:"Finite element method to solve the Schrödinger equation for an electron in a Kronig-Penney periodic potential. Band diagram generation.",
+    tags:[{l:"MATLAB",c:"ty"},{l:"FEM",c:"tp"},{l:"Kronig-Penney",c:"tg"}],
+    github:"https://github.com/darkmatter2000/schrodinger_equation_solver_with_finite_elements",c1:"#f59e0b",c2:"#ef4444",visual:"wave"
+  },
+  {
+    title:"Energy Mix Quantum Optimization",date:"2024",
+    desc:"Quantum optimization algorithms for solving the electricity mix problem in a renewable energy bouquet scenario.",
+    tags:[{l:"Qiskit",c:"tc"},{l:"Optimization",c:"tp"},{l:"Python",c:"tp"}],
+    github:"https://github.com/darkmatter2000/Energy_Mix_Problem",c1:"#22d3ee",c2:"#16a34a",visual:"energy"
+  }
+];
+
+/* ── SVG VISUALS ── */
+function vis(type,c1,c2){
+  const id='v'+Math.random().toString(36).substr(2,5);
+  const gd=`<defs><linearGradient id="${id}" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="${c1}" stop-opacity="0.28"/><stop offset="100%" stop-color="${c2}" stop-opacity="0.14"/></linearGradient></defs><rect width="300" height="110" fill="url(#${id})"/>`;
+  const map={
+    molecule:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      <circle cx="80" cy="55" r="22" fill="${c1}" fill-opacity=".15" stroke="${c1}" stroke-width="1.4" opacity=".7"/>
+      <circle cx="80" cy="55" r="8" fill="${c1}" opacity=".55"/>
+      <circle cx="150" cy="38" r="14" fill="${c2}" fill-opacity=".15" stroke="${c2}" stroke-width="1.4" opacity=".7"/>
+      <circle cx="150" cy="38" r="5" fill="${c2}" opacity=".55"/>
+      <circle cx="200" cy="70" r="18" fill="${c1}" fill-opacity=".12" stroke="${c1}" stroke-width="1.4" opacity=".6"/>
+      <circle cx="200" cy="70" r="7" fill="${c1}" opacity=".45"/>
+      <line x1="95" y1="50" x2="137" y2="42" stroke="${c1}" stroke-width="1.2" opacity=".5"/>
+      <line x1="162" y1="45" x2="184" y2="58" stroke="${c2}" stroke-width="1.2" opacity=".5"/>
+      <circle cx="245" cy="45" r="11" fill="none" stroke="${c2}" stroke-width="1" opacity=".5"/>
+      <line x1="215" y1="63" x2="236" y2="52" stroke="${c1}" stroke-width="1" opacity=".4"/>
+      <text x="14" y="103" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">CUDAQ · Molecular Docking</text>
+    </svg>`,
+    antenna:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      ${[45,100,155,210,260].map((x,i)=>`
+        <polygon points="${x},${82-i%3*8} ${x-7},98 ${x+7},98" fill="${i%2===0?c1:c2}" opacity=".65"/>
+        <circle cx="${x}" cy="${74-i%3*10}" r="3" fill="${i%2===0?c1:c2}" opacity=".85"/>
+        ${[18,30,44].map(r=>`<circle cx="${x}" cy="${74-i%3*10}" r="${r}" fill="none" stroke="${i%2===0?c1:c2}" stroke-width=".5" opacity=".2"/>`).join('')}
+      `).join('')}
+      <text x="14" y="108" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">PULSER · Antenna Placement · 🥇</text>
+    </svg>`,
+    circuit:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      ${[25,52,79].map(y=>`<line x1="18" y1="${y}" x2="282" y2="${y}" stroke="${c1}" stroke-width=".8" opacity=".28"/>`).join('')}
+      <rect x="45" y="17" width="19" height="15" fill="none" stroke="${c1}" stroke-width="1.2" opacity=".75"/><text x="50" y="29" font-family="monospace" font-size="9" fill="${c1}" opacity=".9">H</text>
+      <rect x="105" y="17" width="22" height="15" fill="none" stroke="${c2}" stroke-width="1.2" opacity=".75"/><text x="108" y="29" font-family="monospace" font-size="9" fill="${c2}" opacity=".9">Rx</text>
+      <circle cx="158" cy="25" r="6" fill="none" stroke="${c1}" stroke-width="1.2" opacity=".75"/>
+      <line x1="158" y1="31" x2="158" y2="52" stroke="${c1}" stroke-width="1" opacity=".5"/>
+      <circle cx="158" cy="52" r="4" fill="${c1}" opacity=".6"/>
+      <rect x="198" y="44" width="22" height="15" fill="none" stroke="${c2}" stroke-width="1.2" opacity=".75"/><text x="202" y="56" font-family="monospace" font-size="9" fill="${c2}" opacity=".9">Rz</text>
+      <text x="14" y="103" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">QAOA · Clinical Trials</text>
+    </svg>`,
+    graph:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      <line x1="80" y1="25" x2="155" y2="25" stroke="#ef4444" stroke-width="1.8" opacity=".6" stroke-dasharray="4,3"/>
+      <line x1="80" y1="25" x2="58" y2="78" stroke="${c1}" stroke-width="1.8" opacity=".6"/>
+      <line x1="80" y1="25" x2="155" y2="78" stroke="#ef4444" stroke-width="1.8" opacity=".6" stroke-dasharray="4,3"/>
+      <line x1="155" y1="25" x2="225" y2="52" stroke="${c1}" stroke-width="1.8" opacity=".6"/>
+      <line x1="58" y1="78" x2="155" y2="78" stroke="${c1}" stroke-width="1.8" opacity=".6"/>
+      <line x1="155" y1="78" x2="225" y2="52" stroke="#ef4444" stroke-width="1.8" opacity=".6" stroke-dasharray="4,3"/>
+      <line x1="155" y1="25" x2="155" y2="78" stroke="${c2}" stroke-width="1.5" opacity=".5"/>
+      ${[[80,25],[155,25],[58,78],[155,78],[225,52]].map(([x,y],i)=>`<circle cx="${x}" cy="${y}" r="7" fill="${i<3?c1:c2}" opacity=".85"/><circle cx="${x}" cy="${y}" r="7" fill="none" stroke="#fff" stroke-width=".7" opacity=".3"/>`).join('')}
+      <text x="14" y="103" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">QISKIT · PULSER · MaxCut</text>
+    </svg>`,
+    bloch:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      <ellipse cx="95" cy="55" rx="42" ry="42" fill="none" stroke="${c1}" stroke-width="1" opacity=".38"/>
+      <ellipse cx="95" cy="55" rx="42" ry="17" fill="none" stroke="${c1}" stroke-width=".8" opacity=".25"/>
+      <line x1="95" y1="13" x2="95" y2="97" stroke="${c1}" stroke-width=".8" opacity=".35"/>
+      <line x1="53" y1="55" x2="137" y2="55" stroke="${c1}" stroke-width=".8" opacity=".35"/>
+      <line x1="95" y1="55" x2="122" y2="24" stroke="${c2}" stroke-width="2.2" opacity=".92"/>
+      <circle cx="122" cy="24" r="4" fill="${c2}" opacity=".95"/>
+      <text x="95" y="10" font-family="monospace" font-size="7" fill="${c1}" opacity=".65" text-anchor="middle">|0⟩</text>
+      <text x="95" y="107" font-family="monospace" font-size="7" fill="${c1}" opacity=".65" text-anchor="middle">|1⟩</text>
+      ${[18,40,62].map((y,i)=>`<line x1="170" y1="${y}" x2="285" y2="${y}" stroke="${c1}" stroke-width=".8" opacity=".28"/><rect x="${188+i*18}" y="${y-6}" width="14" height="12" fill="none" stroke="${c2}" stroke-width="1" opacity=".6" rx="2"/>`).join('')}
+      <text x="170" y="103" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">Qiskit · Phase Estimation</text>
+    </svg>`,
+    h2mol:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      <line x1="78" y1="55" x2="108" y2="55" stroke="${c1}" stroke-width="2.5" opacity=".6"/>
+      <circle cx="65" cy="55" r="13" fill="${c1}" fill-opacity=".2" stroke="${c1}" stroke-width="1.5" opacity=".7"/>
+      <text x="65" y="59" font-family="monospace" font-size="9" fill="${c1}" opacity=".92" text-anchor="middle">H</text>
+      <circle cx="118" cy="55" r="13" fill="${c1}" fill-opacity=".2" stroke="${c1}" stroke-width="1.5" opacity=".7"/>
+      <text x="118" y="59" font-family="monospace" font-size="9" fill="${c1}" opacity=".92" text-anchor="middle">H</text>
+      <circle cx="215" cy="52" r="15" fill="${c2}" fill-opacity=".18" stroke="${c2}" stroke-width="1.5" opacity=".75"/>
+      <text x="215" y="57" font-family="monospace" font-size="9" fill="${c2}" opacity=".9" text-anchor="middle">O</text>
+      <line x1="202" y1="43" x2="186" y2="34" stroke="${c2}" stroke-width="1.5" opacity=".5"/>
+      <line x1="228" y1="43" x2="245" y2="34" stroke="${c2}" stroke-width="1.5" opacity=".5"/>
+      <circle cx="181" cy="31" r="9" fill="${c2}" fill-opacity=".15" stroke="${c2}" stroke-width="1" opacity=".6"/>
+      <text x="181" y="35" font-family="monospace" font-size="8" fill="${c2}" opacity=".8" text-anchor="middle">H</text>
+      <circle cx="250" cy="31" r="9" fill="${c2}" fill-opacity=".15" stroke="${c2}" stroke-width="1" opacity=".6"/>
+      <text x="250" y="35" font-family="monospace" font-size="8" fill="${c2}" opacity=".8" text-anchor="middle">H</text>
+      <text x="14" y="103" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">Qiskit · VQE · Molecule Simulation</text>
+    </svg>`,
+    wave:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      <line x1="20" y1="92" x2="282" y2="92" stroke="${c1}" stroke-width=".8" opacity=".28"/>
+      <line x1="20" y1="15" x2="20" y2="92" stroke="${c1}" stroke-width=".8" opacity=".28"/>
+      ${[0,1,2,3,4].map(i=>`<line x1="${42+i*48}" y1="92" x2="${42+i*48}" y2="65" stroke="${c2}" stroke-width="1" opacity=".38"/><line x1="${42+i*48}" y1="65" x2="${66+i*48}" y2="65" stroke="${c2}" stroke-width="1" opacity=".38"/><line x1="${66+i*48}" y1="65" x2="${66+i*48}" y2="92" stroke="${c2}" stroke-width="1" opacity=".38"/>`).join('')}
+      <path d="M20,56 C36,26 54,86 74,56 S114,26 134,56 S174,86 194,56 S234,26 254,56 S274,66 280,62" fill="none" stroke="${c1}" stroke-width="2" opacity=".85"/>
+      <text x="14" y="108" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">MATLAB · FEM · Kronig-Penney</text>
+    </svg>`,
+    energy:`<svg viewBox="0 0 300 110" xmlns="http://www.w3.org/2000/svg">${gd}
+      <path d="M90,55 L90,18 A37,37 0 0,1 127,75 Z" fill="${c1}" opacity=".42"/>
+      <path d="M90,55 L127,75 A37,37 0 0,1 58,82 Z" fill="${c2}" opacity=".42"/>
+      <path d="M90,55 L58,82 A37,37 0 0,1 55,32 Z" fill="#10b981" opacity=".42"/>
+      <path d="M90,55 L55,32 A37,37 0 0,1 90,18 Z" fill="#f59e0b" opacity=".42"/>
+      <circle cx="90" cy="55" r="17" fill="#04091a" opacity=".92"/>
+      <circle cx="90" cy="55" r="37" fill="none" stroke="${c1}" stroke-width=".8" opacity=".28"/>
+      <text x="148" y="30" font-family="monospace" font-size="7.5" fill="${c1}" opacity=".7">☀ Solar</text>
+      <text x="148" y="46" font-family="monospace" font-size="7.5" fill="${c2}" opacity=".7">💨 Wind</text>
+      <text x="148" y="62" font-family="monospace" font-size="7.5" fill="#10b981" opacity=".7">💧 Hydro</text>
+      <text x="148" y="78" font-family="monospace" font-size="7.5" fill="#f59e0b" opacity=".7">⚡ Other</text>
+      <text x="14" y="103" font-family="monospace" font-size="8" fill="${c1}" opacity=".45">Qiskit · Quantum Optimization</text>
+    </svg>`
+  };
+  return map[type]||map.circuit;
+}
+
+/* ── RENDER PROJECT CARDS ── */
+const grid=document.getElementById('pjgrid');
+const ghSVG=`<svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>`;
+
+projects.forEach(p=>{
+  const d=document.createElement('div');
+  d.className='pc'+(p.github?' clickable':'');
+  if(p.github) d.addEventListener('click',()=>window.open(p.github,'_blank'));
+  const tagsH=p.tags.map(t=>`<span class="tag ${t.c}">${t.l}</span>`).join('');
+  const footH=p.github
+    ?`<a href="${p.github}" target="_blank" class="gh-link" onclick="event.stopPropagation()">${ghSVG} View on GitHub</a>`
+    :`<span class="wip">⟳ In progress</span>`;
+  d.innerHTML=`
+    <div class="pv">${vis(p.visual,p.c1,p.c2)}</div>
+    <div class="pb">
+      <div class="pt">${p.title}</div>
+      <div class="pd">${p.desc}</div>
+      <div class="tags">${tagsH}</div>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:.15rem">
+        ${footH}
+        <span class="pdate">${p.date}</span>
+      </div>
+    </div>`;
+  grid.appendChild(d);
+});
+
+/* ── CANVAS ANIMATION ── */
+const canvas=document.getElementById('bg');
+const ctx=canvas.getContext('2d');
+function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight}
+resize();window.addEventListener('resize',resize);
+
+const N=55;
+const dots=Array.from({length:N},()=>({
+  x:Math.random()*window.innerWidth,
+  y:Math.random()*window.innerHeight,
+  vx:(Math.random()-.5)*.28,
+  vy:(Math.random()-.5)*.28,
+  r:Math.random()*1.8+.4
+}));
+
+function frame(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  dots.forEach(d=>{
+    d.x+=d.vx;d.y+=d.vy;
+    if(d.x<0||d.x>canvas.width)d.vx*=-1;
+    if(d.y<0||d.y>canvas.height)d.vy*=-1;
+  });
+  for(let i=0;i<N;i++) for(let j=i+1;j<N;j++){
+    const dx=dots[i].x-dots[j].x,dy=dots[i].y-dots[j].y;
+    const dist=Math.sqrt(dx*dx+dy*dy);
+    if(dist<130){
+      ctx.beginPath();
+      ctx.strokeStyle=`rgba(6,182,212,${.07*(1-dist/130)})`;
+      ctx.lineWidth=.5;
+      ctx.moveTo(dots[i].x,dots[i].y);
+      ctx.lineTo(dots[j].x,dots[j].y);
+      ctx.stroke();
+    }
+  }
+  dots.forEach(d=>{
+    ctx.beginPath();
+    ctx.arc(d.x,d.y,d.r,0,Math.PI*2);
+    ctx.fillStyle='rgba(6,182,212,0.28)';
+    ctx.fill();
+  });
+  requestAnimationFrame(frame);
+}
+frame();
+</script>
+</body>
+</html>
